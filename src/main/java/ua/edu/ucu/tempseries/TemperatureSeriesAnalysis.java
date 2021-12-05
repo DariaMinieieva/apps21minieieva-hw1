@@ -34,7 +34,8 @@ public class TemperatureSeriesAnalysis {
             double temprSum = 0;
 
             for (int i = 0; i < this.size; i++) {
-                temprSum += java.lang.Math.pow(tempsVal[i] - mean, 2);
+                double temp = tempsVal[i] - mean;
+                temprSum += temp*temp;
             }
 
             if (temprSum == 0) {
@@ -86,11 +87,11 @@ public class TemperatureSeriesAnalysis {
             double closesVal = tempsVal[0];
 
             for (int i = 0; i < this.size; i++) {
-                if (java.lang.Math.abs(tempValue - tempsVal[i]) <
-                        java.lang.Math.abs(tempValue - closesVal)) {
+                if (java.lang.Math.abs(tempValue - tempsVal[i])
+                       < java.lang.Math.abs(tempValue - closesVal)) {
                     closesVal = tempsVal[i];
-                } else if (java.lang.Math.abs(tempValue - tempsVal[i]) ==
-                        java.lang.Math.abs(tempValue - closesVal)) {
+                } else if (java.lang.Math.abs(tempValue - tempsVal[i])
+                        == java.lang.Math.abs(tempValue - closesVal)) {
                     if (tempsVal[i]*closesVal < 0) {
                         closesVal = java.lang.Math.abs(closesVal);
                     }
@@ -113,11 +114,11 @@ public class TemperatureSeriesAnalysis {
                 }
             }
 
-            double[] return_res = new double[curIndx];
+            double[] returnRes = new double[curIndx];
             for (int i = 0; i < curIndx; i++) {
-                return_res[i] = results[i];
+                returnRes[i] = results[i];
             }
-            return return_res;
+            return returnRes;
         }
     }
 
@@ -134,11 +135,11 @@ public class TemperatureSeriesAnalysis {
                 }
             }
 
-            double[] return_res = new double[curIndx];
+            double[] returnRes = new double[curIndx];
             for (int i = 0; i < curIndx; i++) {
-                return_res[i] = results[i];
+                returnRes[i] = results[i];
             }
-            return return_res;
+            return returnRes;
         }
     }
 
@@ -166,10 +167,10 @@ public class TemperatureSeriesAnalysis {
                 newArray[i] = tempsVal[i];
             }
 
-            int curr_indx = 0;
+            int currIndx = 0;
 
             for (int i = this.size; i < (this.size + temps.length); i++) {
-                newArray[i] = temps[curr_indx++];
+                newArray[i] = temps[currIndx++];
             }
 
             this.tempsVal = newArray.clone();
