@@ -19,6 +19,16 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(expResult, actualResult, 0.00001);
     }
 
+    @Test
+    public void testEmpty() {
+        // setup input data and expected result
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
+        double[] test = {};
+
+        // compare expected result with actual result
+        assertArrayEquals(test, seriesAnalysis.getTempsVal(), 0.00001);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testAverageWithEmptyArray() {
         double[] temperatureSeries = {};
