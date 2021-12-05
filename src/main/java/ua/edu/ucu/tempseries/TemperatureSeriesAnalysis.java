@@ -1,9 +1,7 @@
 package ua.edu.ucu.tempseries;
-import static java.lang.Math.pow;
-import static java.lang.Math.abs;
 
 public class TemperatureSeriesAnalysis {
-    private double[] temps_val = {};
+    private double[] tempsVal = {};
     private int size = 0;
 
     public TemperatureSeriesAnalysis() {
@@ -11,20 +9,20 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        this.temps_val = temperatureSeries.clone();
-        this.size = this.temps_val.length;
+        this.tempsVal = temperatureSeries.clone();
+        this.size = this.tempsVal.length;
     }
 
     public double average() {
         if (this.size  == 0) {
             throw new IllegalArgumentException("Empty array");
         } else {
-            double sum_of_elems = 0;
-            for (int i = 0; i < this.size ; i++) {
-                sum_of_elems += temps_val[i];
+            double sumElems = 0;
+            for (int i = 0; i < this.size; i++) {
+                sumElems += tempsVal[i];
             }
 
-            return sum_of_elems/this.size ;
+            return sumElems/this.size;
         }
     }
 
@@ -33,16 +31,16 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("Empty array");
         } else {
             double mean = this.average();
-            double tempr_sum = 0;
+            double temprSum = 0;
 
-            for(int i = 0; i < this.size ; i++) {
-                tempr_sum += pow(temps_val[i] - mean, 2);
+            for (int i = 0; i < this.size; i++) {
+                temprSum += java.lang.Math.pow(tempsVal[i] - mean, 2);
             }
 
-            if (tempr_sum == 0) {
+            if (temprSum == 0) {
                 return 0.0;
             } else {
-                return pow(tempr_sum/(this.size  - 1), 0.5);
+                return java.lang.Math.pow(temprSum/(this.size  - 1), 0.5);
             }
         }
     }
@@ -51,14 +49,14 @@ public class TemperatureSeriesAnalysis {
         if (this.size  == 0) {
             throw new IllegalArgumentException("Empty array");
         } else {
-            double min_val = temps_val[0];
+            double minVal = tempsVal[0];
             for (int i = 1; i < this.size; i++) {
-                if (min_val > temps_val[i]) {
-                    min_val = temps_val[i];
+                if (minVal > tempsVal[i]) {
+                    minVal = tempsVal[i];
                 }
             }
 
-            return min_val;
+            return minVal;
         }
     }
 
@@ -66,14 +64,14 @@ public class TemperatureSeriesAnalysis {
         if (this.size == 0) {
             throw new IllegalArgumentException("Empty array");
         } else {
-            double max_val = temps_val[0];
+            double maxVal = tempsVal[0];
             for (int i = 1; i < this.size; i++) {
-                if (max_val < temps_val[i]) {
-                    max_val = temps_val[i];
+                if (maxVal < tempsVal[i]) {
+                    maxVal = tempsVal[i];
                 }
             }
 
-            return max_val;
+            return maxVal;
         }
     }
 
@@ -85,18 +83,20 @@ public class TemperatureSeriesAnalysis {
         if (this.size  == 0) {
             throw new IllegalArgumentException("Empty array");
         } else {
-            double closest_val = temps_val[0];
+            double closesVal = tempsVal[0];
 
-            for (int i = 0; i < this.size ; i++) {
-                if (abs(tempValue - temps_val[i]) < abs(tempValue - closest_val)) {
-                    closest_val = temps_val[i];
-                } else if (abs(tempValue - temps_val[i]) == abs(tempValue - closest_val)) {
-                    if (temps_val[i]*closest_val < 0) {
-                        closest_val = abs(closest_val);
+            for (int i = 0; i < this.size; i++) {
+                if (java.lang.Math.abs(tempValue - tempsVal[i]) <
+                        java.lang.Math.abs(tempValue - closesVal)) {
+                    closesVal = tempsVal[i];
+                } else if (java.lang.Math.abs(tempValue - tempsVal[i]) ==
+                        java.lang.Math.abs(tempValue - closesVal)) {
+                    if (tempsVal[i]*closesVal < 0) {
+                        closesVal = java.lang.Math.abs(closesVal);
                     }
                 }
             }
-            return closest_val;
+            return closesVal;
         }
     }
 
@@ -105,16 +105,16 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("Empty array");
         } else {
             double[] results = new double[this.size];
-            int cur_indx = 0;
+            int curIndx = 0;
 
-            for (int i = 0; i < this.size ; i++) {
-                if (temps_val[i] < tempValue) {
-                    results[cur_indx++] = temps_val[i];
+            for (int i = 0; i < this.size; i++) {
+                if (tempsVal[i] < tempValue) {
+                    results[curIndx++] = tempsVal[i];
                 }
             }
 
-            double[] return_res = new double[cur_indx];
-            for (int i = 0; i < cur_indx; i++) {
+            double[] return_res = new double[curIndx];
+            for (int i = 0; i < curIndx; i++) {
                 return_res[i] = results[i];
             }
             return return_res;
@@ -126,16 +126,16 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("Empty array");
         } else {
             double[] results = new double[this.size];
-            int cur_indx = 0;
+            int curIndx = 0;
 
             for (int i = 0; i < this.size; i++) {
-                if (temps_val[i] > tempValue) {
-                    results[cur_indx++] = temps_val[i];
+                if (tempsVal[i] > tempValue) {
+                    results[curIndx++] = tempsVal[i];
                 }
             }
 
-            double[] return_res = new double[cur_indx];
-            for (int i = 0; i < cur_indx; i++) {
+            double[] return_res = new double[curIndx];
+            for (int i = 0; i < curIndx; i++) {
                 return_res[i] = results[i];
             }
             return return_res;
@@ -143,39 +143,40 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-        return new TempSummaryStatistics(this.average(), this.deviation(), this.min(), this.max());
+        return new TempSummaryStatistics(this.average(), this.deviation(),
+                this.min(), this.max());
     }
 
     public int addTemps(double... temps) {
-        if (temps_val.length < (this.size + temps.length)) {
-            int new_size;
-            if (temps_val.length > 0) {
-                new_size = temps_val.length;
+        if (tempsVal.length < (this.size + temps.length)) {
+            int newSize;
+            if (tempsVal.length > 0) {
+                newSize = tempsVal.length;
             } else {
-                new_size = 1;
+                newSize = 1;
             }
 
-            while (new_size < (temps_val.length + temps.length)) {
-                new_size*=2;
+            while (newSize < (tempsVal.length + temps.length)) {
+                newSize *= 2;
             }
 
 
-            double[] new_array = new double[new_size];
+            double[] newArray = new double[newSize];
             for (int i = 0; i < this.size; i++) {
-                new_array[i] = temps_val[i];
+                newArray[i] = tempsVal[i];
             }
 
             int curr_indx = 0;
 
             for (int i = this.size; i < (this.size + temps.length); i++) {
-                new_array[i] = temps[curr_indx++];
+                newArray[i] = temps[curr_indx++];
             }
 
-            this.temps_val = new_array.clone();
+            this.tempsVal = newArray.clone();
 
         } else {
             for (int i = 0; i < temps.length; i++) {
-                temps_val[i + this.size] = temps[i];
+                tempsVal[i + this.size] = temps[i];
             }
         }
 
@@ -184,7 +185,7 @@ public class TemperatureSeriesAnalysis {
         return 0;
     }
 
-    public double[] getTemps_val() {
-        return temps_val;
+    public double[] getTempsVal() {
+        return tempsVal;
     }
 }

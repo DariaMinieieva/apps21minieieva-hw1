@@ -3,8 +3,6 @@ package ua.edu.ucu.tempseries;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-
 public class TemperatureSeriesAnalysisTest {
 
     @Test
@@ -329,7 +327,7 @@ public class TemperatureSeriesAnalysisTest {
         seriesAnalysis.addTemps(toAdd);
 
         // compare expected result with actual result
-        assertArrayEquals(expResult, seriesAnalysis.getTemps_val(), 0.00001);
+        assertArrayEquals(expResult, seriesAnalysis.getTempsVal(), 0.00001);
     }
 
     @Test
@@ -340,7 +338,7 @@ public class TemperatureSeriesAnalysisTest {
         seriesAnalysis.addTemps(toAdd);
 
         // expect exception here
-        assertArrayEquals(toAdd, seriesAnalysis.getTemps_val(), 0.00001);
+        assertArrayEquals(toAdd, seriesAnalysis.getTempsVal(), 0.00001);
     }
 
     @Test
@@ -352,6 +350,6 @@ public class TemperatureSeriesAnalysisTest {
 
         seriesAnalysis.addTemps(toAdd);
 
-        assertArrayEquals(expResult, seriesAnalysis.getTemps_val(), 0.00001);
+        assertArrayEquals(expResult, seriesAnalysis.getTempsVal(), 0.00001);
     }
 }
