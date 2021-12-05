@@ -1,8 +1,6 @@
 package ua.edu.ucu.tempseries;
-
-import java.util.Arrays;
-
-import static java.lang.Math.*;
+import static java.lang.Math.pow;
+import static java.lang.Math.abs;
 
 public class TemperatureSeriesAnalysis {
     private double[] temps_val = {};
@@ -145,8 +143,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-        TempSummaryStatistics new_o = new TempSummaryStatistics(this.average(), this.deviation(), this.min(), this.max());
-        return new_o;
+        return new TempSummaryStatistics(this.average(), this.deviation(), this.min(), this.max());
     }
 
     public int addTemps(double... temps) {
@@ -175,10 +172,10 @@ public class TemperatureSeriesAnalysis {
             }
 
             this.temps_val = new_array.clone();
-            
+
         } else {
             for (int i = 0; i < temps.length; i++) {
-                temps_val[i + temps_val.length] = temps[i];
+                temps_val[i + this.size] = temps[i];
             }
         }
 
